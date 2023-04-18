@@ -4,14 +4,14 @@ namespace assignment2;
 
 // MyLinkedList extends IEnumerable to be iterable
 // MyLinkedList can take any objects (T)
-public class MyLinkedList<T> : IEnumerable<T>, IMyList<T>
+public class MyLinkedList<T> : IEnumerable<T>, IMyList<T> where T : IComparable<T>
 {
     
     // Private class inside Linked List that defines the node structure
     private class MyNode
     {
         
-        public readonly T Data; // Data stored inside the node
+        public T Data; // Data stored inside the node
         public MyNode Prev; // Reference to previous node
         public MyNode Next; // Reference to next node
 
@@ -351,6 +351,34 @@ public class MyLinkedList<T> : IEnumerable<T>, IMyList<T>
     public int Size()
     {
         return _length;
+    }
+    
+    // Bubble sort for Linked List
+    public void Sort()
+    {
+        if (_head == null || _head.Next == null)
+            return;
+
+        for (int i = 0; i < _length; i++)
+        {
+            MyNode current = _head;
+            for (int j = 0; j < _length - i - 1; j++)
+            {
+                if (current.Next == null)
+                {
+                    continue;
+                }
+                if (current.Data.CompareTo(current.Next.Data) > 0)
+                {
+                    T temp = current.Data;
+                    current.Data = current.Next.Data;
+                    current.Next.Data = temp;
+                }
+
+                current = current.Next;
+            }
+        }
+        
     }
     
     // IEnumerator to iterate through nodes' data in Linked List
