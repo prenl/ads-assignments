@@ -4,7 +4,7 @@ namespace assignment2;
 
 // MyArrayList extends IEnumerable to be iterable
 // MyArrayList can take any objects (T)
-public class MyArrayList<T> : IEnumerable<T>, IMyList<T>
+public class MyArrayList<T> : IEnumerable<T>, IMyList<T> where T : IComparable<T>
 {
     // _hiddenArr is the internal array to store all elements
     private T[] _hiddenArr;
@@ -226,10 +226,19 @@ public class MyArrayList<T> : IEnumerable<T>, IMyList<T>
         return outputArr;
     }
 
-    // Sort method (coming soon)
+    // Bubble sort method for Array List (Only for comparable)
     public void Sort()
     {
-        throw new NotImplementedException();
+        for (int i = 0; i < _length; i++)
+        {
+            for (int j = 0; j < _length - i - 1; j++)
+            {
+                if (_hiddenArr[j].CompareTo(_hiddenArr[j + 1]) > 0)
+                {
+                    (_hiddenArr[j], _hiddenArr[j + 1]) = (_hiddenArr[j + 1], _hiddenArr[j]);
+                }
+            }
+        }
     }
 
     // Check if item is in Array List
