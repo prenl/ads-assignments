@@ -4,20 +4,20 @@ namespace assignment2;
 
 // MyLinkedList extends IEnumerable to be iterable
 // MyLinkedList can take any objects (T)
-public class MyLinkedList<T> : IEnumerable<T>
+public class MyLinkedList<T> : IEnumerable<T>, IMyList<T>
 {
     
     // Private class inside Linked List that defines the node structure
     private class MyNode
     {
         
-        public readonly T data; // Data stored inside the node
-        public MyNode prev; // Reference to previous node
-        public MyNode next; // Reference to next node
+        public readonly T Data; // Data stored inside the node
+        public MyNode Prev; // Reference to previous node
+        public MyNode Next; // Reference to next node
 
         public MyNode(T data)
         {
-            this.data = data;
+            this.Data = data;
         }
         
     }
@@ -42,10 +42,10 @@ public class MyLinkedList<T> : IEnumerable<T>
         else
         {
             // Set the previous node of the new node to the tail
-            newNode.prev = _tail;
+            newNode.Prev = _tail;
             
             // Reference to the next node in the current tail to the new node
-            _tail.next = newNode;
+            _tail.Next = newNode;
             
             // Update the current tail to new node
             _tail = newNode;
@@ -98,10 +98,10 @@ public class MyLinkedList<T> : IEnumerable<T>
         if (index == 0)
         {
             // Place current head as a reference to the next node of new node
-            newNode.next = _head;
+            newNode.Next = _head;
             
             // Place new node as a reference to the previous node of current head
-            _head.prev = newNode;
+            _head.Prev = newNode;
             
             // Update current head node
             _head = newNode;
@@ -111,10 +111,10 @@ public class MyLinkedList<T> : IEnumerable<T>
         else if (index == _length)
         {
             // Place current tail as a reference to the previous node of new node
-            newNode.prev = _tail;
+            newNode.Prev = _tail;
             
             // Place new node as a reference to the next node of current tail
-            _tail.next = newNode;
+            _tail.Next = newNode;
             
             // Update current tail node
             _tail = newNode;
@@ -125,17 +125,17 @@ public class MyLinkedList<T> : IEnumerable<T>
             MyNode temp = _head;
             for (int i = 0; i < index; i++)
             {
-                temp = temp.next;
+                temp = temp.Next;
             }
             
             // Place current node as a reference to the new node's next node
-            newNode.next = temp;
+            newNode.Next = temp;
             // Place current node's previous node as a reference to the new node's previous node
-            newNode.prev = temp.prev;
+            newNode.Prev = temp.Prev;
             
             // Update current node's previous and next node
-            temp.prev.next = newNode;
-            temp.next.prev = newNode;
+            temp.Prev.Next = newNode;
+            temp.Next.Prev = newNode;
         }
     
         // Incrementing length of Linked List
@@ -155,35 +155,35 @@ public class MyLinkedList<T> : IEnumerable<T>
         MyNode temp = _head;
         for (int i = 0; i < index; i++)
         {
-            temp = temp.next;
+            temp = temp.Next;
         }
         
         // Check if given index is linked list's head
-        if (temp.prev == null)
+        if (temp.Prev == null)
         {
             // Change references to and for the next node 
-            newNode.next = temp.next;
-            temp.next.prev = newNode;
+            newNode.Next = temp.Next;
+            temp.Next.Prev = newNode;
             // Update current head of Linked List
             _head = newNode;
         }
         
         // Check if given index is linked list's tail
-        else if (temp.next == null)
+        else if (temp.Next == null)
         {
             // Replace references to and for the previous node
-            newNode.prev = temp.prev;
-            temp.prev.next = newNode;
+            newNode.Prev = temp.Prev;
+            temp.Prev.Next = newNode;
             // Update current tail of Linked List
             _tail = newNode;
         }
         else
         {
             // Replacing the references for the previous and next nodes
-            newNode.prev = temp.prev;
-            newNode.next = temp.next;
-            newNode.prev.next = newNode;
-            newNode.next.prev = newNode;
+            newNode.Prev = temp.Prev;
+            newNode.Next = temp.Next;
+            newNode.Prev.Next = newNode;
+            newNode.Next.Prev = newNode;
         }
     }
     
@@ -197,27 +197,27 @@ public class MyLinkedList<T> : IEnumerable<T>
         // Find node at given index using iteration
         MyNode temp = _head;
         for (int i = 0; i < index; i++) {
-            temp = temp.next;
+            temp = temp.Next;
         }
         
         // Return data inside found node
-        return temp.data;
+        return temp.Data;
     }
 
     // Get head's data
     public T GetFirst()
     {
-        return _head.data;
+        return _head.Data;
     }
 
     // Get tail's data
     public T GetLast()
     {
-        return _tail.data;
+        return _tail.Data;
     }
 
     // Remove item at specific index
-    public void Remove(int index)
+    public T Remove(int index)
     {
         // Check if index is out of range
         if (index < 0 || index >= _length)
@@ -227,26 +227,68 @@ public class MyLinkedList<T> : IEnumerable<T>
         MyNode temp = _head;
         for (int i = 0; i < index; i++)
         {
-            temp = temp.next;
+            temp = temp.Next;
         }
 
         // Check if there is reference to the next node in found node
-        if (temp.next != null)
+        if (temp.Next != null)
         {
-            temp.next.prev = temp.prev;
+            temp.Next.Prev = temp.Prev;
         }
         // Check if found node is the head of Linked List
-        if (temp.prev == null)
+        if (temp.Prev == null)
         {
-            _head = temp.next;
+            _head = temp.Next;
         }
         else
         {
-            temp.prev.next = temp.next;
+            temp.Prev.Next = temp.Next;
         }
         
         // Decrement the length of Linked List
         _length--;
+        
+        // Return removed item
+        return temp.Data;
+    }
+
+    public bool Remove(T item)
+    {
+        // Find node with given data using iteration
+        MyNode temp = _head;
+        for (int i = 0; i < _length; i++)
+        {
+            if (temp.Data.Equals(item))
+            {
+                break;
+            }
+            temp = temp.Next;
+        }
+        
+        // Check if item was found
+        if (temp == null)
+            return false;
+        
+        // Check if there is reference to the next node in found node
+        if (temp.Next != null)
+        {
+            temp.Next.Prev = temp.Prev;
+        }
+        // Check if found node is the head of Linked List
+        if (temp.Prev == null)
+        {
+            _head = temp.Next;
+        }
+        else
+        {
+            temp.Prev.Next = temp.Next;
+        }
+
+        // Decrement the length of Linked List
+        _length--;
+        
+        // Return true to confirm that item was removed
+        return true;
     }
 
     // Check if Linked List has specific item
@@ -257,14 +299,52 @@ public class MyLinkedList<T> : IEnumerable<T>
         for (int i = 0; i < _length; i++)
         {
             // Check if each node's data is equal to given data
-            if (temp.data.Equals(item))
+            if (temp.Data.Equals(item))
                 // Return true if found
                 return true;
 
-            temp = temp.next;
+            temp = temp.Next;
         }
         // Return false after iteration if was not found
         return false;
+    }
+    
+    // Find index of given item
+    public int IndexOf(T item)
+    {
+        // Iterate over nodes in Linked List
+        MyNode temp = _head;
+        for (int i = 0; i < _length; i++)
+        {
+            // Check if each node's data is equal to given data
+            if (temp.Data.Equals(item))
+                // Return the index of given item
+                return i;
+
+            temp = temp.Next;
+        }
+
+        // Return -1 if item was not found
+        return -1;
+    }
+    
+    // Find last index of given item
+    public int LastIndexOf(T item)
+    {
+        // Iterate over nodes in Linked List from tail
+        MyNode temp = _tail;
+        for (int i = _length - 1; i >= 0; i--)
+        {
+            // Check if each node's data is equal to given data
+            if (temp.Data.Equals(item))
+                // Return the index of given item
+                return i;
+
+            temp = temp.Prev;
+        }
+        
+        // Return -1 if item was not found
+        return -1;
     }
 
     // Get the length of Linked List
@@ -280,8 +360,8 @@ public class MyLinkedList<T> : IEnumerable<T>
 
         while (temp != null)
         {
-            yield return temp.data;
-            temp = temp.next;
+            yield return temp.Data;
+            temp = temp.Next;
         }
     }
     
