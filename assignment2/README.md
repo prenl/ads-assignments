@@ -2,6 +2,18 @@
 # ASTANA IT UNIVERSITY
 ### SE-2203, Abdrakhmanov Yelnur 🇰🇿
 
+IMyList interface
+- `Size()` - int
+- `Contains(object item)` - bool
+- `Add(object item)` - void
+- `Add(object item, int index)` - void
+- `Remove(object item)` - object
+- `Clear()` - void
+- `Get(int index)` - object
+- `IndexOf(object item)` - int
+- `LastIndexOf(object item)` - int
+- `Sort()` - void
+
 MyArrayList class
 - `Add(object item)` - void, add element to list
 - `Add(object item, int index)` - void, add element at specific index
@@ -10,9 +22,12 @@ MyArrayList class
 - `Get(int index)` - object, return element at given index
 - `Size()` - int, return length of list
 - `IndexOf(object item)` - int, return index of item in list
-- `Remove(int index)` - book, return true if removed
+- `LastIndexOf(object item)` - int, return last occurance index of item in list
+- `Remove(int index)` - object, remove element at specific index
+- `Remove(object item)` - bool, remove specific element if found
 - `RemoveAll(IEnumerable<object> list)` - void, remove elements of collection from list
 - `Clear()` - void, clear list
+- `Sort()` - void, bubble sort
 - `ToArray()` - array, return array of elements of list
 - `Contains(object item)` - bool, return true if item is in list
 - List is iterable using IEnumerator
@@ -36,9 +51,13 @@ MyLinkedList class
 - `Get(int index)` - object, return element at specific index
 - `GetFirst()` - object, return head of the list
 - `GetLast()` - object, return tail of the list
-- `Remove(int index)` - void, remove element at specific index
+- `Remove(int index)` - object, remove element at specific index
+- `Remove(object item)` - bool, remove specific element if found
+- `IndexOf(object item)` - int, return index of item in list
+- `LastIndexOf(object item)` - int, return last occurance index of item in list
 - `Contains(object item)` - bool, return true if object is in the list
 - `Size()` - int, return length of the list
+- `Sort()` - void, bubble sort
 - List is iterable using IEnumerator
 
 Assignment was done on `C# (.net 7.0)`, using `JetBrains Rider IDE`
