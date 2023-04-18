@@ -4,7 +4,7 @@ namespace assignment2;
 
 // MyArrayList extends IEnumerable to be iterable
 // MyArrayList can take any objects (T)
-public class MyArrayList<T> : IEnumerable<T>
+public class MyArrayList<T> : IEnumerable<T>, IMyList<T> where T : IComparable<T>
 {
     // _hiddenArr is the internal array to store all elements
     private T[] _hiddenArr;
@@ -127,11 +127,26 @@ public class MyArrayList<T> : IEnumerable<T>
         {
             // Check if each item is equal to given item
             if (_hiddenArr[i].Equals(item))
-                // Return the index of given item
+                // Return the index of given item if found
                 return i;
         }
 
         // Return -1 if given item was not found
+        return -1;
+    }
+
+    // Last index of specific item in Array List
+    public int LastIndexOf(T item)
+    {
+        // Check if each item is equal to given item from tail
+        for (int i = _length - 1; i >= 0; i--)
+        {
+            // Return the last index of given item if found
+            if (_hiddenArr[i].Equals(item))
+                return i;
+        }
+        
+        // Return -1 if given item was not found 
         return -1;
     }
 
@@ -151,14 +166,17 @@ public class MyArrayList<T> : IEnumerable<T>
         // Return true to show that item was removed
         return true;
     }
-
+    
     // Remove an item at specific location (index)
-    public bool Remove(int index)
+    public T Remove(int index)
     {
         // Check if the index is out of range
-        if (index >= _length)
-            // Return false if the index is out of range
-            return false;
+        if (index >= _length || index < 0)
+            // Throw an exception if index is out of range
+            throw new IndexOutOfRangeException();
+        
+        // Create temp variable for returning
+        T temp = _hiddenArr[index];
         
         // Shift every item from given to the left
         for (int i = index; i < _length - 1; i++)
@@ -168,9 +186,9 @@ public class MyArrayList<T> : IEnumerable<T>
         
         // Decrement the length of Array List
         _length--;
-
-        // Return true to show that item was removed
-        return true;
+        
+        // Return value if removed from Array List
+        return temp;
     }
 
     // Remove all items in collection from Array List
@@ -208,6 +226,21 @@ public class MyArrayList<T> : IEnumerable<T>
         return outputArr;
     }
 
+    // Bubble sort method for Array List (Only for comparable)
+    public void Sort()
+    {
+        for (int i = 0; i < _length; i++)
+        {
+            for (int j = 0; j < _length - i - 1; j++)
+            {
+                if (_hiddenArr[j].CompareTo(_hiddenArr[j + 1]) > 0)
+                {
+                    (_hiddenArr[j], _hiddenArr[j + 1]) = (_hiddenArr[j + 1], _hiddenArr[j]);
+                }
+            }
+        }
+    }
+
     // Check if item is in Array List
     public bool Contains(T item)
     {
@@ -227,7 +260,7 @@ public class MyArrayList<T> : IEnumerable<T>
     // IEnumerator to iterate through items of Array List
     public IEnumerator<T> GetEnumerator()
     {
-        // Iterating over Array List to yeild each item
+        // Iterating over Array List to yield each item
         for (int i = 0; i < _length; i++)
         {
             yield return _hiddenArr[i];

@@ -4,14 +4,14 @@ namespace assignment2;
 
 // MyLinkedList extends IEnumerable to be iterable
 // MyLinkedList can take any objects (T)
-public class MyLinkedList<T> : IEnumerable<T>
+public class MyLinkedList<T> : IEnumerable<T>, IMyList<T> where T : IComparable<T>
 {
     
     // Private class inside Linked List that defines the node structure
     private class MyNode
     {
         
-        public readonly T Data; // Data stored inside the node
+        public T Data; // Data stored inside the node
         public MyNode Prev; // Reference to previous node
         public MyNode Next; // Reference to next node
 
@@ -217,7 +217,7 @@ public class MyLinkedList<T> : IEnumerable<T>
     }
 
     // Remove item at specific index
-    public void Remove(int index)
+    public T Remove(int index)
     {
         // Check if index is out of range
         if (index < 0 || index >= _length)
@@ -247,6 +247,48 @@ public class MyLinkedList<T> : IEnumerable<T>
         
         // Decrement the length of Linked List
         _length--;
+        
+        // Return removed item
+        return temp.Data;
+    }
+
+    public bool Remove(T item)
+    {
+        // Find node with given data using iteration
+        MyNode temp = _head;
+        for (int i = 0; i < _length; i++)
+        {
+            if (temp.Data.Equals(item))
+            {
+                break;
+            }
+            temp = temp.Next;
+        }
+        
+        // Check if item was found
+        if (temp == null)
+            return false;
+        
+        // Check if there is reference to the next node in found node
+        if (temp.Next != null)
+        {
+            temp.Next.Prev = temp.Prev;
+        }
+        // Check if found node is the head of Linked List
+        if (temp.Prev == null)
+        {
+            _head = temp.Next;
+        }
+        else
+        {
+            temp.Prev.Next = temp.Next;
+        }
+
+        // Decrement the length of Linked List
+        _length--;
+        
+        // Return true to confirm that item was removed
+        return true;
     }
 
     // Check if Linked List has specific item
@@ -266,11 +308,77 @@ public class MyLinkedList<T> : IEnumerable<T>
         // Return false after iteration if was not found
         return false;
     }
+    
+    // Find index of given item
+    public int IndexOf(T item)
+    {
+        // Iterate over nodes in Linked List
+        MyNode temp = _head;
+        for (int i = 0; i < _length; i++)
+        {
+            // Check if each node's data is equal to given data
+            if (temp.Data.Equals(item))
+                // Return the index of given item
+                return i;
+
+            temp = temp.Next;
+        }
+
+        // Return -1 if item was not found
+        return -1;
+    }
+    
+    // Find last index of given item
+    public int LastIndexOf(T item)
+    {
+        // Iterate over nodes in Linked List from tail
+        MyNode temp = _tail;
+        for (int i = _length - 1; i >= 0; i--)
+        {
+            // Check if each node's data is equal to given data
+            if (temp.Data.Equals(item))
+                // Return the index of given item
+                return i;
+
+            temp = temp.Prev;
+        }
+        
+        // Return -1 if item was not found
+        return -1;
+    }
 
     // Get the length of Linked List
     public int Size()
     {
         return _length;
+    }
+    
+    // Bubble sort for Linked List
+    public void Sort()
+    {
+        if (_head == null || _head.Next == null)
+            return;
+
+        for (int i = 0; i < _length; i++)
+        {
+            MyNode current = _head;
+            for (int j = 0; j < _length - i - 1; j++)
+            {
+                if (current.Next == null)
+                {
+                    continue;
+                }
+                if (current.Data.CompareTo(current.Next.Data) > 0)
+                {
+                    T temp = current.Data;
+                    current.Data = current.Next.Data;
+                    current.Next.Data = temp;
+                }
+
+                current = current.Next;
+            }
+        }
+        
     }
     
     // IEnumerator to iterate through nodes' data in Linked List
