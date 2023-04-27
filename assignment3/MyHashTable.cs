@@ -2,28 +2,56 @@
 
 public class MyHashTable<K, V>
 {
-    private class HashNode<K, V>
+    // HashNode class -> stores key, value and pointer to the next bucket or item
+    private class MyHashNode<K, V>
     {
-        private K _key;
-        private V _value;
+        public K Key;
+        public V Value;
+        public MyHashNode<K, V>? Next;
 
-        public HashNode(K key, V value)
+        public MyHashNode(K key, V value)
         {
-            this._key = key;
-            this._value = value;
+            Key = key;
+            Value = value;
         }
 
         public override string ToString()
         {
-            return "{ " + _key + " " + _value + " }";
+            return "{ " + Key + " " + Value + " }";
         }
     }
-
-    private HashNode<K, V>[] _chainArray;
-    private int _m = 11;
-    private int size;
     
+    // Chain of buckets
+    private MyHashNode<K, V>[] _chainArray;
+    // Default amount of buckets
+    private int M = 11;
+    // Amount of items in whole HashTable
+    private int Size;
+
+    // Non default constructor that takes M - amount of buckets after creating HashTable
+    public MyHashTable(int m)
+    {
+        M = m;
+        _chainArray = new MyHashNode<K, V>[M];
+        Size = 0;
+    }
     
+    // Default constructor creates 11 buckets
+    public MyHashTable() : this(11)
+    {
+    }
 
+    // Method takes key and return bucket's number that will take this item
+    private int Hash(K key)
+    {
+        // Get HashCode from object
+        int index = key.GetHashCode();
+        // Find index of bucket
+        index %= M;
+        
+        // Return index
+        return index;
+    }
 
+    
 }
