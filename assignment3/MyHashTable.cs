@@ -7,32 +7,31 @@ public class MyHashTable<K, V>
     {
         public K Key;
         public V Value;
+        // Reference to the next node
         public MyHashNode<K, V>? Next;
-
+        
+        // Constructor that takes key/value and put inside node
         public MyHashNode(K key, V value)
         {
             Key = key;
             Value = value;
         }
-
+        
         public override string ToString()
         {
             return "{ " + Key + " " + Value + " }";
         }
     }
     
-    // Chain of buckets
-    private MyHashNode<K, V>[] _chainArray;
-    // Default amount of buckets
-    private int M = 11;
-    // Amount of items in whole HashTable
-    private int Size;
+    private MyHashNode<K, V>[] _chainArray; // Chain of buckets
+    private int M = 11; // Default amount of buckets
+    private int Size; // Amount of items in whole HashTable
 
     // Non default constructor that takes M - amount of buckets after creating HashTable
     public MyHashTable(int m)
     {
         M = m;
-        _chainArray = new MyHashNode<K, V>[M];
+        _chainArray = new MyHashNode<K, V>[M]; // Create M amounts of bucket
         Size = 0;
     }
     
@@ -44,13 +43,29 @@ public class MyHashTable<K, V>
     // Method takes key and return bucket's number that will take this item
     private int Hash(K key)
     {
-        // Get HashCode from object
-        int index = key.GetHashCode();
-        // Find index of bucket
-        index %= M;
+        int index = key.GetHashCode(); // Get HashCode from object
+        index %= M; // Find index of bucket
+        return index; // Return index
+    }
+    
+    // Method takes key return value
+    public V? Get(K key)
+    {
+        int index = Hash(key); // Find index of bucket
+        MyHashNode<K, V>? temp = _chainArray[index]; // Take head of list as temp
+
+        // Iterate through list while key is not equal to given
+        while (temp != null)
+        {
+            // Check if key equals to given
+            if (temp.Key.Equals(key)) 
+                return temp.Value; // Return Value if found
+            
+            temp = temp.Next;
+        }
         
-        // Return index
-        return index;
+        // Return default if not found
+        return default;
     }
 
     
