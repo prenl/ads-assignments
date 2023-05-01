@@ -120,6 +120,58 @@ public class MyHashTable<K, V>
         // Return default (null) if not found
         return default;
     }
+    
+    // Method takes value and return true if found
+    public bool Contains(V value)
+    {
+        MyHashNode<K, V>? temp; // Create temp value to iterate buckets
+        
+        // For each loop through every bucket in HashTable
+        foreach (MyHashNode<K, V> head in _chainArray)
+        {
+            temp = head;
+            
+            // Iteration through bucket's items
+            while (temp != null)
+            {
+                // Check if value equals to given
+                if (temp.Value.Equals(value))
+                {
+                    return true; // Return true if found
+                }
+                
+                temp = temp.Next;
+            }
+        }
+        
+        return false; // Return false if not found
+    }
+
+    // Method takes value and returns key if found
+    public K? GetKey(V value)
+    {
+        MyHashNode<K, V> temp;
+        
+        // For each loop through every bucket in HashTable
+        foreach (MyHashNode<K, V> head in _chainArray)
+        {
+            temp = head;
+            
+            // Iteration through bucket's items
+            while (temp != null)
+            {
+                // Check if value equals to given
+                if (temp.Value.Equals(value))
+                {
+                    return temp.Key; // Return key if found
+                }
+                
+                temp = temp.Next;
+            }
+        }
+
+        return default; // Return null if not found
+    }
 
 
 }
