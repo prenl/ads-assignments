@@ -37,7 +37,6 @@ public class MyTestingClass
 
         
         hashCode *= 31;
-        Console.WriteLine(hashCode);
         return hashCode;
     }
 
