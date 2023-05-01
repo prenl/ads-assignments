@@ -173,5 +173,33 @@ public class MyHashTable<K, V>
         return default; // Return null if not found
     }
 
+    // Method returns size
+    public int Size()
+    {
+        return _size;
+    }
 
+    public override string ToString()
+    {
+        string output = "";
+        int counter;
+
+        MyHashNode<K, V>? temp;
+
+        for (int i = 0; i < M; i++)
+        {
+            counter = 0;
+            temp = _chainArray[i];
+
+            while (temp != null)
+            {
+                counter++;
+                temp = temp.Next;
+            }
+            output += "Bucket №" + i + ": " + counter + "\n";
+        }
+
+        return output;
+    }
+    
 }
