@@ -1,4 +1,6 @@
-﻿namespace assignment3;
+﻿using System.Threading.Channels;
+
+namespace assignment3;
 
 public class MyHashTable<K, V>
 {
@@ -94,10 +96,10 @@ public class MyHashTable<K, V>
             if (current.Key.Equals(key))
             {
                 // Check if previous is null
-                if (prev.Equals(null)) 
+                if (prev == null) 
                 {
                     _chainArray[index] = current.Next; // Set current's next as head of bucket
-                } 
+                }
                 // If next is null
                 else if (current.Next == null)
                 {
