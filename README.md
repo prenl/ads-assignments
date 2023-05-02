@@ -9,3 +9,8 @@ Assignment2 `C# (.net 7.0)`
 - MyArrayList
 - MyLinkedList
 - IMyList
+
+Assignment3 `C# (.net 7.0)`
+- MyHashNode
+- MyHashTable
+- MyTestingClass
