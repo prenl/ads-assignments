@@ -1,6 +1,4 @@
-﻿using System.Threading.Channels;
-
-namespace assignment3;
+﻿namespace assignment3;
 
 public class MyHashTable<K, V>
 {
