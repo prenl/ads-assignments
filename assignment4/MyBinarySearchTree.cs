@@ -74,7 +74,33 @@ public class MyBinarySearchTree<K, V> where K : IComparable<K>
         else
             parent.Left = new MyNode<K, V>(key, value); // Set parent's left reference to node with given key/value
     }
-    
-    
+
+    // Method takes key and gives value
+    public V? Get(K key)
+    {
+        // Check if root is null
+        if (Empty()) 
+            return default; // default
+        
+        MyNode<K, V>? temp = _root; // Create new variable to iterate through MyBST
+
+        // Iterate through MyBST
+        while (temp != null)
+        {
+            // Check if given key is equal/less/more than current's key
+            switch (key.CompareTo(temp.Key))
+            {
+                case 0: // equals
+                    return temp.Value; // Return value of key
+                case < 0: // less
+                    temp = temp.Left; break; // Move to the left side of MyBST
+                case > 0: // more
+                    temp = temp.Right; break; // Move to the right side of MyBST
+            }
+        }
+        
+        // Return default value if not found
+        return default;
+    }
 
 }
