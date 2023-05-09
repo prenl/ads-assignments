@@ -1,6 +1,8 @@
-﻿namespace assignment4;
+﻿using System.Collections;
 
-public class MyBinarySearchTree<K, V> where K : IComparable<K>
+namespace assignment4;
+
+public class MyBinarySearchTree<K, V> : IEnumerable<K> where K : IComparable<K>
 {
     public class MyNode<K, V> where K : IComparable<K>
     {
@@ -103,4 +105,13 @@ public class MyBinarySearchTree<K, V> where K : IComparable<K>
         return default;
     }
 
+    public IEnumerator<K> GetEnumerator()
+    {
+        throw new NotImplementedException();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
 }
