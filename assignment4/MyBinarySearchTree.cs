@@ -1,16 +1,17 @@
 ﻿namespace assignment4;
 
-public class MyBinarySearchTree<T> where T : IComparable<T>
+public class MyBinarySearchTree<K, V> where K : IComparable<K>
 {
-    public class MyNode<T> where T : IComparable<T>
+    public class MyNode<K, V> where K : IComparable<K>
     {
-        public T Data;
-        public MyNode<T> Left;
-        public MyNode<T> Right;
+        public K Key;
+        public V Value;
+        public MyNode<K, V> Left, Right;
         
-        public MyNode(T data)
+        public MyNode(K key, V value)
         {
-            Data = data;
+            Key = key;
+            Value = value;
         }
     }
 
@@ -22,21 +23,4 @@ public class MyBinarySearchTree<T> where T : IComparable<T>
         return _root == null;
     }
 
-    public MyNode<T> Insert(T value, MyNode<T>? current)
-    {
-        if (current == null)
-            return new MyNode<T>(value);
-
-        if (value.Equals(current.Data))
-        {
-            current.Right = Insert(value, current.Right);
-        }
-        else
-        {
-            current.Left = Insert(value, current.Left);
-        }
-
-        return null;
-    }
-    
 }
