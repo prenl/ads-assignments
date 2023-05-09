@@ -136,9 +136,9 @@ public class MyBinarySearchTree<K, V> : IEnumerable<K> where K : IComparable<K>
         if (temp.Left == null && temp.Right == null)
         {
             // Check if node is parent's left or right reference
-            if (parent.Left.Equals(temp))
+            if (parent.Left != null && parent.Left.Equals(temp))
                 parent.Left = null; // Set parent's left reference as null
-            else
+            else if (parent.Right != null && parent.Right.Equals(temp))
                 parent.Right = null; // Set parent's right reference as null
         }
         // if node has only left or right
@@ -181,10 +181,26 @@ public class MyBinarySearchTree<K, V> : IEnumerable<K> where K : IComparable<K>
         }
     }
 
+    // Converts data to Arraylist
+    private void FillArray(MyNode<K, V> node, ArrayList list)
+    {
+        if (node == null) return;
+
+        FillArray(node.Left, list);
+        list.Add(node);
+        FillArray(node.Right, list);
+    }
+
     public IEnumerator<K> GetEnumerator()
     {
-        throw new NotImplementedException();
-    }
+        if (Empty()) yield break;
+
+        ArrayList nodes = new ArrayList();
+        FillArray(_root, nodes);
+
+        foreach (MyNode<K, V> node in nodes)
+            yield return node.Key;
+    }   
 
     IEnumerator IEnumerable.GetEnumerator()
     {
