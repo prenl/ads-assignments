@@ -104,6 +104,82 @@ public class MyBinarySearchTree<K, V> : IEnumerable<K> where K : IComparable<K>
         // Return default value if not found
         return default;
     }
+    
+    // Method takes key and removes from MyBST
+    // Visualization: https://imgur.com/a/YFpB5PU
+    public void Delete(K key)
+    {
+        // Check whether root is null
+        if (Empty()) return;
+        
+        MyNode<K, V>? temp = _root; // Create new variable to iterate through MyBST
+        MyNode<K, V>? parent = null; // Create parent variable
+
+        // Iterate through MyBST while not found
+        while (!temp.Key.Equals(key))
+        {
+            // Check if given key is less/more than current's key
+            switch (key.CompareTo(temp.Key))
+            {
+                case < 0: // less
+                    parent = temp; // Set parent's reference to current node
+                    temp = temp.Left; // Move to the left side of MyBST
+                    break;
+                case > 0: // more
+                    parent = temp; // Set parent's reference to current node
+                    temp = temp.Right; // Move to the right side of MyBST
+                    break;
+            }
+        }
+
+        // Check if node has no left and right
+        if (temp.Left == null && temp.Right == null)
+        {
+            // Check if node is parent's left or right reference
+            if (parent.Left.Equals(temp))
+                parent.Left = null; // Set parent's left reference as null
+            else
+                parent.Right = null; // Set parent's right reference as null
+        }
+        // if node has only left or right
+        else if (temp.Left == null || temp.Right == null)
+        {
+            // Check if missing reference is left
+            if (temp.Left == null)
+            {
+                // Check if parent's left reference is current node
+                if (parent.Left.Equals(temp))
+                    parent.Left = temp.Right; // Set parent's left reference as current's right reference
+                else
+                    parent.Right = temp.Right; // Set parent's right reference as current's right reference
+            }
+            // Missing reference is right
+            else
+            {
+                // Check if parent's left reference is current node
+                if (parent.Left.Equals(temp))
+                    parent.Left = temp.Left; // Set parent's left reference as current's left reference
+                else
+                    parent.Right = temp.Left; // Set parent's right reference as current's left reference
+            }
+        }
+        // If node has both left and right references
+        else
+        {
+            MyNode<K, V> removed = temp; // Save reference to node that will be deleted
+            temp = temp.Right; // Move to the right side of MyBST
+
+            // Iterate throught MyBST to find needed node
+            while (temp.Left != null)
+            {
+                parent = temp; // Set parent as current
+                temp = temp.Left; // Move to the left side of MyBST
+            }
+
+            parent.Left = null; // Delete node
+            removed = temp; // Replace deleted node by found node (173 line)
+        }
+    }
 
     public IEnumerator<K> GetEnumerator()
     {
