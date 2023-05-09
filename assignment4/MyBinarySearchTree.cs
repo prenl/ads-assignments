@@ -40,6 +40,7 @@ public class MyBinarySearchTree<K, V> : IEnumerable<K> where K : IComparable<K>
         if (Empty())
         {
             _root = new MyNode<K, V>(key, value); // Create new node with given key/value and put as root
+            _size++;
             return; // The end of the method
         }
 
@@ -65,6 +66,7 @@ public class MyBinarySearchTree<K, V> : IEnumerable<K> where K : IComparable<K>
             else
             {
                 temp.Value = value; // Set new value for node
+                _size++;
                 return; // The end of the method
             }
         }
@@ -75,6 +77,7 @@ public class MyBinarySearchTree<K, V> : IEnumerable<K> where K : IComparable<K>
         // Check whether given key is less than parent's key
         else
             parent.Left = new MyNode<K, V>(key, value); // Set parent's left reference to node with given key/value
+        _size++;
     }
 
     // Method takes key and gives value
@@ -179,6 +182,12 @@ public class MyBinarySearchTree<K, V> : IEnumerable<K> where K : IComparable<K>
             parent.Left = null; // Delete node
             removed = temp; // Replace deleted node by found node (173 line)
         }
+        _size--;
+    }
+
+    public int Size()
+    {
+        return _size;
     }
 
     // Converts data to Arraylist
