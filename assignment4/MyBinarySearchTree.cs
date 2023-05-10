@@ -8,7 +8,7 @@ public class MyBinarySearchTree<K, V> : IEnumerable<K> where K : IComparable<K>
     {
         public K Key;
         public V Value;
-        public MyNode<K, V> Left, Right;
+        public MyNode<K, V> Left, Right, Parent;
         
         public MyNode(K key, V value)
         {
