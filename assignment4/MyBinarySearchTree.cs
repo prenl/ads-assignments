@@ -40,12 +40,12 @@ public class MyBinarySearchTree<K, V> : IEnumerable<K> where K : IComparable<K>
         if (Empty())
         {
             _root = new MyNode<K, V>(key, value); // Create new node with given key/value and put as root
-            _size++;
+            _size = 1; // Set size as 1
             return; // The end of the method
         }
 
         MyNode<K, V>? temp = _root; // Create variable to iterate through MyBST
-        MyNode<K, V>? parent = null; // Create parent variable to check whether its more or less than temp
+        MyNode<K, V>? parent = null;
 
         // Iterate through MyBST
         while (temp != null)
@@ -73,11 +73,18 @@ public class MyBinarySearchTree<K, V> : IEnumerable<K> where K : IComparable<K>
 
         // Check whether given key is more than parent's key
         if (key.CompareTo(parent.Key) > 0)
+        {
             parent.Right = new MyNode<K, V>(key, value); // Set parent's right reference to node with given key/value
+            parent.Right.Parent = parent; // Set new node's parent reference
+        }
         // Check whether given key is less than parent's key
         else
+        {
             parent.Left = new MyNode<K, V>(key, value); // Set parent's left reference to node with given key/value
-        _size++;
+            parent.Left.Parent = parent; // Set new node's parent reference
+        }
+        
+        _size++; // Increment size
     }
 
     // Method takes key and gives value

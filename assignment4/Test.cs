@@ -6,6 +6,8 @@ public class Test
     {
         MyBinarySearchTree<int, string> tree = new MyBinarySearchTree<int, string>();
         
+        Console.WriteLine("Empty? " + tree.Empty());
+        
         tree.Put(1, "one");
         tree.Put(3, "three");
         tree.Put(0, "zero");
@@ -23,5 +25,7 @@ public class Test
         {
             Console.WriteLine(key);
         }
+
+        Console.WriteLine("Size: " + tree.Size());
     }
 }
