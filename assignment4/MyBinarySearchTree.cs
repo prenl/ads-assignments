@@ -208,28 +208,16 @@ public class MyBinarySearchTree<K, V> : IEnumerable<K> where K : IComparable<K>
         _size--; // Decrement size
     }
 
+    // Method returns amount of nodes
     public int Size()
     {
         return _size;
     }
 
-    // Converts data to Arraylist
-    private void FillArray(MyNode<K, V> node, ArrayList list)
-    {
-        if (node == null) return;
-
-        FillArray(node.Left, list);
-        list.Add(node);
-        FillArray(node.Right, list);
-    }
-
     public IEnumerator<K> GetEnumerator()
     {
         if (Empty()) yield break;
-
-        ArrayList nodes = new ArrayList();
-        FillArray(_root, nodes);
-
+        
         foreach (MyNode<K, V> node in nodes)
             yield return node.Key;
     }   
