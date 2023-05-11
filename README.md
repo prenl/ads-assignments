@@ -14,3 +14,8 @@ Assignment3 `C# (.net 7.0)`
 - MyHashNode
 - MyHashTable
 - MyTestingClass
+
+Assignment4 `C# (.net 7.0)`
+- MyBinarySearchTree
+- MyNode (KeyValuePair)
+- Tests
