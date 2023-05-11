@@ -2,7 +2,7 @@
 
 namespace assignment4;
 
-public class MyBinarySearchTree<K, V> : IEnumerable<K> where K : IComparable<K>
+public class MyBinarySearchTree<K, V> : IEnumerable where K : IComparable<K>
 {
     public class MyNode<K, V> where K : IComparable<K>
     {
@@ -14,6 +14,11 @@ public class MyBinarySearchTree<K, V> : IEnumerable<K> where K : IComparable<K>
         {
             Key = key;
             Value = value;
+        }
+
+        public override string ToString()
+        {
+            return "{key='" + Key + "', value='" + Value + "'}";
         }
     }
 
@@ -249,15 +254,24 @@ public class MyBinarySearchTree<K, V> : IEnumerable<K> where K : IComparable<K>
         return new MyNode<K, V>(temp.Key, temp.Value); 
     }
 
-    private IEnumerable<MyNode<K, V>> InOrderTraversal(MyNode<K, V> node)
+    private void InOrderTraversal(ArrayList list, MyNode<K, V> node)
     {
-        throw new NotImplementedException();
+            if (node == null) return;
+            
+            InOrderTraversal(list, node.Left);
+            list.Add(node);
+            InOrderTraversal(list, node.Right);
     }
 
     // Iterator
-    public IEnumerator<K> GetEnumerator()
+    public IEnumerator<MyNode<K, V>> GetEnumerator()
     {
-        throw new NotImplementedException();
+        ArrayList list = new ArrayList();
+        InOrderTraversal(list, _root);
+
+        foreach (MyNode<K, V> node in list)
+            yield return node;
+
     }   
 
     IEnumerator IEnumerable.GetEnumerator()
