@@ -6,6 +6,8 @@
 
 To test this assignment you should run Test.cs file
 
+<img src="https://i.imgur.com/2ES8NKL.png" alt="Test results">
+
 #
 
 MyNode class
