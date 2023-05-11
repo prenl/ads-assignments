@@ -127,6 +127,8 @@ public class MyBinarySearchTree<K, V> : IEnumerable<K> where K : IComparable<K>
         // Iterate through MyBST while not found
         while (!temp.Key.Equals(key))
         {
+            if (temp.Left == null || temp.Right == null) throw new KeyNotFoundException("The given key is not found in BST.");
+            
             // Check if given key is less/more than current's key
             switch (key.CompareTo(temp.Key))
             {
@@ -166,20 +168,21 @@ public class MyBinarySearchTree<K, V> : IEnumerable<K> where K : IComparable<K>
                 {
                     temp.Parent.Right = temp.Right; // Set parent's right reference as current's right reference
                     temp.Parent.Right.Parent = temp.Parent;
-                }            }
+                }            
+            }
             // Missing reference is right
             else
             {
                 // Check if parent's left reference is current node
-                if (temp.Parent.Left.Equals(temp))
-                {
-                    temp.Parent.Left = temp.Left; // Set parent's left reference as current's left reference
-                    temp.Parent.Left.Parent = temp.Parent;
-                }
-                else
+                if (temp.Parent.Right.Equals(temp))
                 {
                     temp.Parent.Right = temp.Left; // Set parent's right reference as current's left reference
                     temp.Parent.Right.Parent = temp.Parent;
+                }
+                else
+                {
+                    temp.Parent.Left = temp.Left; // Set parent's left reference as current's left reference
+                    temp.Parent.Left.Parent = temp.Parent;
                 }
             }
         }
@@ -213,13 +216,48 @@ public class MyBinarySearchTree<K, V> : IEnumerable<K> where K : IComparable<K>
     {
         return _size;
     }
+    
+    // Method returns min node
+    public MyNode<K, V> Min()
+    {
+        // Check whether root is empty
+        if (Empty()) return default;
+        
+        MyNode<K, V> temp = _root; // Iterator
+        while (temp.Left != null) // Iteration through MyBST
+        {
+            temp = temp.Left; // Move to the left
+        }
+        
+        // Return most left node's information
+        return new MyNode<K, V>(temp.Key, temp.Value); 
+    }
+    
+    // Method returns max node
+    public MyNode<K, V> Max()
+    {
+        // Check whether root is empty
+        if (Empty()) return default;
+        
+        MyNode<K, V> temp = _root; // Iterator
+        while (temp.Right != null) // Iteration through MyBST
+        {
+            temp = temp.Right; // Move to the left
+        }
+        
+        // Return most left node's information
+        return new MyNode<K, V>(temp.Key, temp.Value); 
+    }
 
+    private IEnumerable<MyNode<K, V>> InOrderTraversal(MyNode<K, V> node)
+    {
+        throw new NotImplementedException();
+    }
+
+    // Iterator
     public IEnumerator<K> GetEnumerator()
     {
-        if (Empty()) yield break;
-        
-        foreach (MyNode<K, V> node in nodes)
-            yield return node.Key;
+        throw new NotImplementedException();
     }   
 
     IEnumerator IEnumerable.GetEnumerator()
