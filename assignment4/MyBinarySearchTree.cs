@@ -254,24 +254,28 @@ public class MyBinarySearchTree<K, V> : IEnumerable where K : IComparable<K>
         return new MyNode<K, V>(temp.Key, temp.Value); 
     }
 
+    // Method takes arraylist and root node and fills with items in MyBST
+    // It will divide BST on smaller BST while they won't have only root and then add them
     private void InOrderTraversal(ArrayList list, MyNode<K, V> node)
     {
-            if (node == null) return;
+        // Check if current node is the last
+        if (node == null) return;
             
-            InOrderTraversal(list, node.Left);
-            list.Add(node);
-            InOrderTraversal(list, node.Right);
+        InOrderTraversal(list, node.Left); // Call method with left side of MyBST
+        list.Add(new KeyValuePair<K, V>(node.Key, node.Value)); // Add root of original MyBST
+        InOrderTraversal(list, node.Right); // Call method with right side of MyBST
+        
     }
 
     // Iterator
-    public IEnumerator<MyNode<K, V>> GetEnumerator()
+    public IEnumerator<KeyValuePair<K, V>> GetEnumerator()
     {
-        ArrayList list = new ArrayList();
-        InOrderTraversal(list, _root);
+        ArrayList list = new ArrayList(); // Create list for key/value in MyBST
+        InOrderTraversal(list, _root); // Fill Array in order traversal
 
-        foreach (MyNode<K, V> node in list)
-            yield return node;
-
+        // Iterate and return
+        foreach (KeyValuePair<K, V> keyvalue in list)
+            yield return keyvalue;
     }   
 
     IEnumerator IEnumerable.GetEnumerator()
