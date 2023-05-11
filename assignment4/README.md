@@ -24,7 +24,7 @@ MyBinarySearchTree
 - `Remove(K key)` - void, removes key/value from MyBST
 - `Get(K key)` - V, get value by key
 - `Size()` - int, return amount of items
-+ `Enumerator` support
+- `Enumerator` support (always in order traversal)
 
 #
 
