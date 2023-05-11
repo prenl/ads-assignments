@@ -6,26 +6,29 @@ public class Test
     {
         MyBinarySearchTree<int, string> tree = new MyBinarySearchTree<int, string>();
         
-        Console.WriteLine("Empty? " + tree.Empty());
-        
-        tree.Put(1, "one");
-        tree.Put(3, "three");
+        Console.WriteLine("> Empty? " + tree.Empty());
+
+        Console.WriteLine("> Filling the tree...");
         tree.Put(0, "zero");
-        tree.Put(12, "twelve");
+        tree.Put(3, "one");
+        tree.Put(1, "three");
+        tree.Put(13, "13teen");
         tree.Put(7, "seven");
         tree.Put(11, "eleven");
+        Console.WriteLine("> Tree filled.");
         
-        tree.Delete(11);
-        
-        Console.WriteLine("Empty? " + tree.Empty());
-        
-        Console.WriteLine("1 : " + tree.Get(1));
+        Console.WriteLine("> Empty? " + tree.Empty());
+        Console.WriteLine();
+        Console.WriteLine("> Maximum value => " + tree.Max());
+        Console.WriteLine("> Minimum value => " + tree.Min());
+        Console.WriteLine();
 
-        foreach (int key in tree)
+        Console.WriteLine("> All values => ...");
+        foreach (KeyValuePair<int, string> keyvalue in tree)
         {
-            Console.WriteLine(key);
+            Console.WriteLine(keyvalue);
         }
 
-        Console.WriteLine("Size: " + tree.Size());
+        Console.WriteLine("> Size: " + tree.Size());
     }
 }
