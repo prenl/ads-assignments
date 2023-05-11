@@ -223,7 +223,7 @@ public class MyBinarySearchTree<K, V> : IEnumerable where K : IComparable<K>
     }
     
     // Method returns min node
-    public MyNode<K, V> Min()
+    public KeyValuePair<K, V> Min()
     {
         // Check whether root is empty
         if (Empty()) return default;
@@ -235,11 +235,11 @@ public class MyBinarySearchTree<K, V> : IEnumerable where K : IComparable<K>
         }
         
         // Return most left node's information
-        return new MyNode<K, V>(temp.Key, temp.Value); 
+        return new KeyValuePair<K, V>(temp.Key, temp.Value); 
     }
     
     // Method returns max node
-    public MyNode<K, V> Max()
+    public KeyValuePair<K, V> Max()
     {
         // Check whether root is empty
         if (Empty()) return default;
@@ -251,7 +251,7 @@ public class MyBinarySearchTree<K, V> : IEnumerable where K : IComparable<K>
         }
         
         // Return most left node's information
-        return new MyNode<K, V>(temp.Key, temp.Value); 
+        return new KeyValuePair<K, V>(temp.Key, temp.Value); 
     }
 
     // Method takes arraylist and root node and fills with items in MyBST
