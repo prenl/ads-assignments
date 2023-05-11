@@ -21,10 +21,13 @@ MyNode class
 MyBinarySearchTree
 - `MyBinarySearchTree()` - default constructor
 - `Put(K key, V value)` - void, puts key/value inside MyBST
-- `Remove(K key)` - void, removes key/value from MyBST
+- `Delete(K key)` - void, removes key/value from MyBST
 - `Get(K key)` - V, get value by key
 - `Size()` - int, return amount of items
-- `Enumerator` support (always in order traversal)
+- `Min()` - KeyValuePair, gives minimum value
+- `Max()` - KeyValuePair, gives maximum value
+- `Empty()` - bool, check if MyBST is empty
+- `Enumerator<KeyValuePair>` support (always in order traversal)
 
 #
 
