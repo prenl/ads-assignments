@@ -132,7 +132,7 @@ public class MyBinarySearchTree<K, V> : IEnumerable where K : IComparable<K>
         // Iterate through MyBST while not found
         while (!temp.Key.Equals(key))
         {
-            if (temp.Left == null || temp.Right == null) throw new KeyNotFoundException("The given key is not found in BST.");
+            if (temp.Left == null && temp.Right == null) throw new KeyNotFoundException("The given key is not found in BST.");
             
             // Check if given key is less/more than current's key
             switch (key.CompareTo(temp.Key))
@@ -164,7 +164,7 @@ public class MyBinarySearchTree<K, V> : IEnumerable where K : IComparable<K>
             if (temp.Left == null)
             {
                 // Check if parent's left reference is current node
-                if (temp.Parent.Left.Equals(temp))
+                if (temp.Parent.Left != null && temp.Parent.Left.Equals(temp))
                 {
                     temp.Parent.Left = temp.Right; // Set parent's left reference as current's right reference
                     temp.Parent.Left.Parent = temp.Parent; // Set new parent reference
@@ -254,28 +254,48 @@ public class MyBinarySearchTree<K, V> : IEnumerable where K : IComparable<K>
         return new KeyValuePair<K, V>(temp.Key, temp.Value); 
     }
 
-    // Method takes arraylist and root node and fills with items in MyBST
-    // It will divide BST on smaller BST while they won't have only root and then add them
-    private void InOrderTraversal(ArrayList list, MyNode<K, V> node)
-    {
-        // Check if current node is the last
-        if (node == null) return;
-            
-        InOrderTraversal(list, node.Left); // Call method with left side of MyBST
-        list.Add(new KeyValuePair<K, V>(node.Key, node.Value)); // Add root of original MyBST
-        InOrderTraversal(list, node.Right); // Call method with right side of MyBST
-        
-    }
-
-    // Iterator
+    // Iterator (In order traversal)
     public IEnumerator<KeyValuePair<K, V>> GetEnumerator()
     {
-        ArrayList list = new ArrayList(); // Create list for key/value in MyBST
-        InOrderTraversal(list, _root); // Fill Array in order traversal
+        MyNode<K, V> temp = _root; // Create temp node for permutation
+        MyNode<K, V> prev = null; // Node that is used as new head while permutating nodes
 
-        // Iterate and return
-        foreach (KeyValuePair<K, V> keyvalue in list)
-            yield return keyvalue;
+        // Iteration through MyBST
+        while (temp != null)
+        {
+            // Check if temp has left node
+            if (temp.Left == null)
+            {
+                yield return new KeyValuePair<K, V> (temp.Key, temp.Value); // Return keyvalue pair
+                temp = temp.Right; // Move temp to the right                
+            }
+            // If temp has left node we should find the maximum of it
+            else
+            {
+                prev = temp.Left; // Moving to the left side
+
+                // Iterating for finding max value for left node
+                while (prev.Right != null && prev.Right != temp)
+                {
+                    prev = prev.Right; // Moving to the right
+                }
+
+                // Check if right is null
+                if (prev.Right == null)
+                {
+                    prev.Right = temp; // Continue right side by temp's elements (making an increasing line)
+                    temp = temp.Left; // Moving temp to the left for 
+                }
+                // If temp's right is equal to temp
+                else
+                {
+                    prev.Right = null; // Set prev's right as null (delete prev's right reference)
+                    yield return new KeyValuePair<K, V>(temp.Key, temp.Value); // Return current value
+                    temp = temp.Right; // Move to the right
+                }
+            }
+        }
+
     }   
 
     IEnumerator IEnumerable.GetEnumerator()
