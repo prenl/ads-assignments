@@ -32,4 +32,28 @@ public class SorterTests
         Assert.AreEqual(new int[] { -3, -1, 0, 23, 54 }, arr);
     }
 
+    [Test]
+    public void QuickSorting()
+    {
+        int[] arr = { 9, 8, 7, 6, 5, 4 };
+        _sorter.QuickSort(arr);
+        Assert.AreEqual(new int[] { 4, 5, 6, 7, 8, 9 }, arr);
+    }
+
+    [Test]
+    public void QuickSorting2()
+    {
+        int[] arr = { 23, 46, 13, 24, 7, 1 };
+        _sorter.QuickSort(arr);
+        Assert.AreEqual(new int[] { 1, 7, 13, 23, 24, 46 }, arr);
+    }
+
+    [Test]
+    public void QuickSorting3()
+    {
+        int[] arr = { -1, -3, 0, 54, 23 };
+        _sorter.QuickSort(arr);
+        Assert.AreEqual(new int[] { -3, -1, 0, 23, 54 }, arr);
+    }
+
 }
