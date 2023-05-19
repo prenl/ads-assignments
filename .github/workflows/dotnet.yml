@@ -22,9 +22,13 @@ jobs:
         dotnet-version: 7.0.x
     - name: Restore dependencies
       run: dotnet restore
+      working-directory: ads-assignments
     - name: Build
-      run: dotnet build path/to/assignment5/assignment5.csproj --no-restore
+      run: dotnet build ads-assignments/assignment5.csproj --no-restore
+      working-directory: ads-assignments
     - name: Test
-      run: dotnet test path/to/assignment5/assignment5.csproj --no-build --verbosity normal
-    - name: Run Main File
-      run: dotnet run --project path/to/assignment5/assignment5.csproj
+      run: dotnet test ads-assignments/assignment5.csproj --no-build --verbosity normal
+      working-directory: ads-assignments
+    - name: Run Main
+      run: dotnet run --project ads-assignments/assignment5.csproj
+      working-directory: ads-assignments
