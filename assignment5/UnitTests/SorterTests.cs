@@ -29,7 +29,7 @@ public class SorterTests
     {
         int[] arr = { -1, -3, 0, 54, 23 };
         _sorter.MergeSort(arr);
-        Assert.AreEqual(new int[] { -1, -3, 0, 54, 23 }, arr);
+        Assert.AreEqual(new int[] { -3, -1, 0, 23, 54 }, arr);
     }
 
 }
