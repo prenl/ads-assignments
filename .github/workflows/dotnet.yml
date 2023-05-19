@@ -24,11 +24,11 @@ jobs:
       run: dotnet restore
       working-directory: ads-assignments
     - name: Build
-      run: dotnet build ads-assignments/assignment5.csproj --no-restore
-      working-directory: ads-assignments
+      run: dotnet build assignment5.csproj --no-restore
+      working-directory: assignment5
     - name: Test
-      run: dotnet test ads-assignments/assignment5.csproj --no-build --verbosity normal
-      working-directory: ads-assignments
+      run: dotnet test assignment5.csproj --no-build --verbosity normal
+      working-directory: assignment5
     - name: Run Main
-      run: dotnet run --project ads-assignments/assignment5.csproj
-      working-directory: ads-assignments
+      run: dotnet run --project assignment5.csproj
+      working-directory: assignment5
