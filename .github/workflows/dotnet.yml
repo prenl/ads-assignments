@@ -21,14 +21,10 @@ jobs:
       with:
         dotnet-version: 7.0.x
     - name: Restore dependencies
-      run: dotnet restore
-      working-directory: ads-assignments
+      run: dotnet restore assignment5
     - name: Build
-      run: dotnet build assignment5.csproj --no-restore
-      working-directory: assignment5
+      run: dotnet build assignment5 --no-restore
     - name: Test
-      run: dotnet test assignment5.csproj --no-build --verbosity normal
-      working-directory: assignment5
+      run: dotnet test assignment5 --no-build --verbosity normal
     - name: Run Main
-      run: dotnet run --project assignment5.csproj
-      working-directory: assignment5
+      run: dotnet run --project assignment5
