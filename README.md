@@ -2,7 +2,7 @@
 # Astana IT University
 Abdrakhmanov Yelnur SE2203
 
-Assignment1 `C++ 20`
+Assignment1 `C++17`
 - Recursion
 
 Assignment2 `C# (.net 7.0)`
@@ -21,6 +21,6 @@ Assignment4 `C# (.net 7.0)`
 - Tests
 
 Assignment5 `C# (.net 7.0)`
-- Sorter { MergeSort, Quicksort }
+- Sorter (MergeSort, QuickSort)
 - SorterTests (NUnit Framework)
 - Github actions
