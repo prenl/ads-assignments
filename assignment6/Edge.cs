@@ -10,7 +10,13 @@ public class Edge<V>
     {
         _source = source;
         _dest = dest;
-        this._weight = weight;
+        _weight = weight;
+    }
+
+    public Edge(Vertex<V> source, Vertex<V> dest)
+    {
+        _source = source;
+        _dest = dest;
     }
 
     public Vertex<V> getSource()
