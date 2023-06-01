@@ -1,24 +1,24 @@
 ﻿namespace assignment6;
 
-public class Edge<Vertex>
+public class Edge<V>
 {
-    private Vertex<string> _source;
-    private Vertex<string> _dest;
+    private Vertex<V> _source;
+    private Vertex<V> _dest;
     private double _weight;
 
-    public Edge(Vertex<string> source, Vertex<string> dest, double weight)
+    public Edge(Vertex<V> source, Vertex<V> dest, double weight)
     {
         _source = source;
         _dest = dest;
         this._weight = weight;
     }
 
-    public Vertex<string> getSource()
+    public Vertex<V> getSource()
     {
         return _source;
     }
 
-    public Vertex<string> getDest()
+    public Vertex<V> getDest()
     {
         return _dest;
     }
@@ -28,12 +28,12 @@ public class Edge<Vertex>
         return _weight;
     }
 
-    public void setDest(Vertex<string> dest)
+    public void setDest(Vertex<V> dest)
     {
         _dest = dest;
     }
 
-    public void setSource(Vertex<string> source)
+    public void setSource(Vertex<V> source)
     {
         _source = source;
     }
@@ -45,10 +45,10 @@ public class Edge<Vertex>
 
     public override bool Equals(object? obj)
     {
-        if (obj == null) return false;
+        if (obj == null || GetType() != obj.GetType()) return false;
         if (this == obj) return true;
 
-        Edge<Vertex> edge = (Edge<Vertex>)obj;
+        Edge<V> edge = (Edge<V>)obj;
         return _source.Equals(edge._source) && _dest.Equals(edge._dest);
     }
 }
