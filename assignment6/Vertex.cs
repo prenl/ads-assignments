@@ -3,12 +3,17 @@
 public class Vertex<V>
 {
 
-    private V Data;
+    private V _data;
     private Dictionary<Vertex<V>, double> AdjacentVertices;
 
     public Vertex(V data) {
-        Data = data;
+        _data = data;
         AdjacentVertices = new Dictionary<Vertex<V>, double>();
+    }
+
+    public V GetData()
+    {
+        return _data;
     }
 
     public void AddAdjacentVertex(Vertex<V> vertex, double weight)
@@ -24,14 +29,12 @@ public class Vertex<V>
         {
             foreach(var v in AdjacentVertices.Keys)
             {
-                if(vertex.Data.Equals(v.Data))
+                if(vertex._data.Equals(v._data))
                 {
                     AdjacentVertices.Remove(v);
                 }
             }
         }
     }
-
-
 
 }
