@@ -4,11 +4,11 @@ public class Vertex<V>
 {
 
     private V _data;
-    private Dictionary<Vertex<V>, double> AdjacentVertices;
+    private Dictionary<Vertex<V>, double> _adjacentVertices;
 
     public Vertex(V data) {
         _data = data;
-        AdjacentVertices = new Dictionary<Vertex<V>, double>();
+        _adjacentVertices = new Dictionary<Vertex<V>, double>();
     }
 
     public V GetData()
@@ -18,20 +18,20 @@ public class Vertex<V>
 
     public void AddAdjacentVertex(Vertex<V> vertex, double weight)
     {
-        AdjacentVertices.Add(vertex, weight);
+        _adjacentVertices.Add(vertex, weight);
     }
 
     public void DeleteAdjacentVertex(Vertex<V> vertex) 
     {
-        bool delete = AdjacentVertices.Remove(vertex);
+        bool delete = _adjacentVertices.Remove(vertex);
 
         if (!delete)
         {
-            foreach(var v in AdjacentVertices.Keys)
+            foreach(var v in _adjacentVertices.Keys)
             {
-                if(vertex._data.Equals(v._data))
+                if(vertex._data.Equals(v.GetData()))
                 {
-                    AdjacentVertices.Remove(v);
+                    _adjacentVertices.Remove(v);
                 }
             }
         }
