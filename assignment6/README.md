@@ -42,8 +42,8 @@
 
 #
   
-┌ `BreadthFirstSearch class` - iteratively traverses the graph, visiting all adjacent vertices at each level before proceeding to the next level, providing a search in width. #
-├ `DepthFirstSearch class` - goes deeper into the graph by visiting one vertex, then recursively goes deep into each unvisited vertex until the end, providing a search in depth. #
+┌ `BreadthFirstSearch class` - iteratively traverses the graph, visiting all adjacent vertices at each level before proceeding to the next level, providing a search in width. <br/>
+├ `DepthFirstSearch class` - goes deeper into the graph by visiting one vertex, then recursively goes deep into each unvisited vertex until the end, providing a search in depth. <br/>
 ├ `DijkstraSearch class` - iteratively goes through all the paths in search of the "easiest" way, taking into account the weight of each edge.
 │
 └ HAVE THE SAME METHODS
