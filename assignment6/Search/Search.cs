@@ -1,7 +1,8 @@
 ﻿namespace assignment6.Search;
 
-public class Search<Vertex>
+public abstract class Search<Vertex>
 {
+
     protected int Count;
     protected HashSet<Vertex> Marked;
     protected Dictionary<Vertex, Vertex> EdgeTo;
