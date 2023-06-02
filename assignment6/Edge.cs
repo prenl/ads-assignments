@@ -19,32 +19,32 @@ public class Edge<Vertex>
         _dest = dest;
     }
 
-    public Vertex getSource()
+    public Vertex GetSource()
     {
         return _source;
     }
 
-    public Vertex getDest()
+    public Vertex GetDest()
     {
         return _dest;
     }
 
-    public double getWeight()
+    public double GetWeight()
     {
         return _weight;
     }
 
-    public void setDest(Vertex dest)
+    public void SetDest(Vertex dest)
     {
         _dest = dest;
     }
 
-    public void setSource(Vertex source)
+    public void SetSource(Vertex source)
     {
         _source = source;
     }
 
-    public void setWeight(double weight)
+    public void SetWeight(double weight)
     {
         _weight = weight;
     }
