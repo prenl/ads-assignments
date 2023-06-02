@@ -64,16 +64,16 @@ public class WeightedGraph<Vertex>
         return counter;
     }
 
-    public IEnumerable<Vertex> adjacencyList(Vertex v)
+    public IEnumerable<Vertex> AdjacencyList(Vertex v)
     {
         if (!hasVertex(v)) yield break;
 
         foreach(var edge in _map[v]) {
-            yield return edge.getDest();
+            yield return edge.GetDest();
         }
     }
 
-    public IEnumerable<Edge<Vertex>> getEdges(Vertex v) 
+    public IEnumerable<Edge<Vertex>> GetEdges(Vertex v) 
     { 
         if (!hasVertex(v)) return null;
         return _map[v];
