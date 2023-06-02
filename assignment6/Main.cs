@@ -15,9 +15,17 @@ public class Program
         graph.AddEdge("Almaty", "Kyzylorda", 27);
         graph.AddEdge("Shymkent", "Kyzylorda", 5.4);
 
-        BreadthFirstSearch<string> search = new BreadthFirstSearch<string>(graph, "Almaty");
-        outputPath(search, "Shymkent");
-        
+        BreadthFirstSearch<string> bfs = new BreadthFirstSearch<string>(graph, "Almaty");
+        outputPath(bfs, "Kyzylorda");
+        Console.WriteLine();
+
+        DepthFirstSearch<string> dfs = new DepthFirstSearch<string>(graph, "Almaty");
+        outputPath(dfs, "Kyzylorda");
+        Console.WriteLine();
+
+        DijkstraSearch<string> ds = new DijkstraSearch<string>(graph, "Almaty");
+        outputPath(ds, "Kyzylorda");
+
     }
 
     public static void outputPath(Search<string> search, String key)
