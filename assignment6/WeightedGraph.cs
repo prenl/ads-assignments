@@ -15,14 +15,14 @@ public class WeightedGraph<Vertex>
         _undirected = undirected;
     }
 
-    public bool hasVertex(Vertex vertex)
+    public bool HasVertex(Vertex vertex)
     {
         return _map.ContainsKey(vertex);
     }
 
-    public bool hasEdge(Vertex source, Vertex dest)
+    public bool HasEdge(Vertex source, Vertex dest)
     {
-        if (!hasVertex(source)) return false;
+        if (!HasVertex(source)) return false;
         return _map[source].Contains(new Edge<Vertex>(source, dest));
     }
 
@@ -33,10 +33,10 @@ public class WeightedGraph<Vertex>
 
     public void AddEdge(Vertex source, Vertex dest, double weight)
     {
-        if (!hasVertex(source)) AddVertex(source);
-        if (!hasVertex(dest)) AddVertex(dest);
+        if (!HasVertex(source)) AddVertex(source);
+        if (!HasVertex(dest)) AddVertex(dest);
 
-        if (hasEdge(source, dest) || source.Equals(dest)) return;
+        if (HasEdge(source, dest) || source.Equals(dest)) return;
 
         _map[source].Add(new Edge<Vertex>(source, dest, weight));
 
@@ -66,7 +66,7 @@ public class WeightedGraph<Vertex>
 
     public IEnumerable<Vertex> AdjacencyList(Vertex v)
     {
-        if (!hasVertex(v)) yield break;
+        if (!HasVertex(v)) yield break;
 
         foreach(var edge in _map[v]) {
             yield return edge.GetDest();
@@ -75,7 +75,7 @@ public class WeightedGraph<Vertex>
 
     public IEnumerable<Edge<Vertex>> GetEdges(Vertex v) 
     { 
-        if (!hasVertex(v)) return null;
+        if (!HasVertex(v)) return null;
         return _map[v];
     }
 
