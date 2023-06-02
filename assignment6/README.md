@@ -44,9 +44,9 @@
   
 ┌ `BreadthFirstSearch class` - visits all adjacent vertices at each level before proceeding to the next, providing a search in width. <br/>
 ├ `DepthFirstSearch class` - visits one vertex, then recursively goes deep into each vertex until the end, providing a search in depth. <br/>
-├ `DijkstraSearch class` - iteratively goes through all the paths in search of the "easiest" way by the weight of each edge.
-│
-└ HAVE THE SAME METHODS
+├ `DijkstraSearch class` - iteratively goes through all the paths in search of the "easiest" way by the weight of each edge. <br/>
+│ <br/>
+└ HAVE THE SAME METHODS <br/>
 
 - `AlgorithmName(WeightedGraph<Vertex>, Vertex source)` - constructor, creates and executes chosen search algoritm
 - `HasPathTo(Vertex v)` - bool, check if source Vertex has way to specified destination 
