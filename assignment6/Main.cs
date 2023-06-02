@@ -1,4 +1,6 @@
-﻿namespace assignment6;
+﻿using assignment6.Search;
+
+namespace assignment6;
 
 public class Program
 {
@@ -10,14 +12,14 @@ public class Program
         graph.AddEdge("Almaty", "Astana", 2.1);
         graph.AddEdge("Almaty", "Shymkent", 7.2);
         graph.AddEdge("Shymkent", "Astana", 3.9);
-        graph.AddEdge("Astana", "Kostanay", 3.5);
+        graph.AddEdge("Almaty", "Kyzylorda", 27);
         graph.AddEdge("Shymkent", "Kyzylorda", 5.4);
 
-        foreach(var ver in graph.getEdges("Almaty"))
-        {
-            Console.WriteLine(ver);
+        DijkstraSearch<string> search = new DijkstraSearch<string>(graph, "Almaty");
+        
+        foreach(var item in search.GetPathTo("Kyzylorda")) {
+            Console.Write(item + " <--> ");
         }
-
     }
 
 }
