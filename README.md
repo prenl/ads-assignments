@@ -24,3 +24,12 @@ Assignment5 `C# (.net 7.0)`
 - Sorter (MergeSort, QuickSort)
 - SorterTests (NUnit Framework)
 - Github actions
+
+Assignment6 `C# (.net 7.0)`
+- Vertex
+- Edge
+- WeightedGraph 
+- BreadthFirstSearch 
+- DepthFirstSearch 
+- DijkstraSearch
+- UnitTests
