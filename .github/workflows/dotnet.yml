@@ -24,5 +24,7 @@ jobs:
       run: dotnet restore assignment6
     - name: Build
       run: dotnet build assignment6 --no-restore
+    - name: Test
+      run: dotnet test assignment6 --no-build --verbosity normal
     - name: Run Main
       run: dotnet run --project assignment6
