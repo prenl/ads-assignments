@@ -17,8 +17,10 @@ public class DijkstraSearch<Vertex> : Search<Vertex>
 
     private double GetShortestDistance(Vertex dest)
     {
-        double d = Distances[dest];
-        return (d == null) ? double.MaxValue : d;
+        if (Distances.TryGetValue(dest, out double d))
+            return d;
+
+        return double.MaxValue;
     }
 
     private double GetDistance(Vertex from, Vertex to)
@@ -36,27 +38,19 @@ public class DijkstraSearch<Vertex> : Search<Vertex>
 
     private Vertex GetVertexWithMinimumWeight(HashSet<Vertex> vertices)
     {
-        Vertex? min = default;
-
-        foreach (Vertex v in vertices) 
+        Vertex min = default;
+        foreach (Vertex v in vertices)
         {
-            if (min == null)
+            if (min == null || GetShortestDistance(v) < GetShortestDistance(min))
             {
                 min = v;
-            } 
-            else
-            {
-                if (GetShortestDistance(v) <  GetShortestDistance(min))
-                {
-                    min = v;
-                }
             }
         }
 
         return min;
     }
 
-    private void Dijkstra()
+    public void Dijkstra()
     {
         Distances.Add(Source, 0);
         UnsettledNodes.Add(Source);
@@ -69,10 +63,11 @@ public class DijkstraSearch<Vertex> : Search<Vertex>
 
             foreach (Vertex v in Graph.AdjacencyList(node))
             {
-                if (GetShortestDistance(v) > GetShortestDistance(node) + GetDistance(node, v))
+                double newDistance = GetShortestDistance(node) + GetDistance(node, v);
+                if (GetShortestDistance(v) > newDistance)
                 {
-                    Distances.Add(v, GetShortestDistance(node) + GetDistance(node, v));
-                    EdgeTo.Add(v, node);
+                    Distances[v] = newDistance;
+                    EdgeTo[v] = node;
                     UnsettledNodes.Add(v);
                 }
             }
